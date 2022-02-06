@@ -1,0 +1,17 @@
+@import '../common/color.scss';
+
+//#region lnb
+.lnb {
+  background-color: $navy;
+  height: 100%;
+
+  .title {
+    padding: 5px 20px;
+    // border-bottom: 1px solid $daryNavy;
+    span {
+      font-size: x-large;
+      color: $white;
+    }
+  }
+}
+//#endregion
