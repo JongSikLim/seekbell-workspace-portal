@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
+import commonAxios from 'utils/apiHelper';
 
 export const MenuListState = atom<any>({
   key: 'MenuListState',
-  default: {},
+  default: commonAxios.get(),
 });

@@ -18,3 +18,20 @@ model Category {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 }
+
+model User {
+
+}
+
+model Cafeteria {
+
+}
+
+model Cafeteria_menu {
+
+}
+
+model Order {
+
+}
+model  
