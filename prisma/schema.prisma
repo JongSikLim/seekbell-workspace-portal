@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model Category {
   category_id String   @id @default(uuid())
   title       String   @unique
@@ -20,18 +25,58 @@ model Category {
 }
 
 model User {
+  user_id    String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String
+  role       Role     @default(USER)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
+  Order           Order[]
+  Order_detail    Order_detail? @relation(fields: [order_detail_id], references: [order_detail_id])
+  order_detail_id String?
 }
 
 model Cafeteria {
-
+  cafeteria_id   String           @id @default(uuid())
+  cafeteria_name String
+  menus          Cafeteria_menu[]
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  Order          Order[]
 }
 
 model Cafeteria_menu {
+  menu_id    String @id @default(uuid())
+  menu_title String
+  price      Int
 
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+  Cafeteria       Cafeteria?     @relation(fields: [cafeteria_id_fk], references: [cafeteria_id])
+  cafeteria_id_fk String?
+  Order_detail    Order_detail[]
 }
 
+// 주문
 model Order {
-
+  order_id        String         @id @default(uuid())
+  order_date      DateTime       @default(now())
+  order_user      User           @relation(fields: [user_id_fk], references: [user_id])
+  Cafeteria       Cafeteria      @relation(fields: [cafeteria_id_fk], references: [cafeteria_id])
+  cafeteria_id_fk String
+  user_id_fk      String
+  Order_detail    Order_detail[]
 }
-model  
+
+// 주문 상세 메뉴
+model Order_detail {
+  order_detail_id String         @id @default(uuid())
+  order_id        Order          @relation(fields: [order_id_fk], references: [order_id])
+  order_id_fk     String
+  User            User[] // 메뉴 주인
+  menu_id         Cafeteria_menu @relation(fields: [menu_id_fk], references: [menu_id])
+  menu_id_fk      String
+  menu_count      Int
+}

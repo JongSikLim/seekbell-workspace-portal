@@ -3,5 +3,10 @@ import commonAxios from 'utils/apiHelper';
 
 export const MenuListState = atom<any>({
   key: 'MenuListState',
-  default: commonAxios.get(),
+  default: false,
+});
+
+export const orderListState = atom<any>({
+  key: 'orderListState',
+  default: commonAxios.get(`/order`),
 });

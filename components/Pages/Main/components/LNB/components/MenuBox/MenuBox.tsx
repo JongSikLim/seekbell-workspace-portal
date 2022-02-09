@@ -1,26 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
+import { useRecoilState, useRecoilStateLoadable } from 'recoil';
+import { MenuListState } from 'recoils/atoms/main';
 
 const MenuBox = () => {
-  const handleClick = () => {
-    fetch('http://localhost:3000/api/category', {
-      method: 'GET',
-      mode: 'same-origin',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        const data = res.json();
-        console.log('data: ', data);
-      })
-      .catch((err) => {
-        console.log('err: ', err);
-      });
-  };
+  const [menuList, setMenuList] = useRecoilStateLoadable(MenuListState);
+
   return (
     <div>
-      <button onClick={handleClick}>아아 마이크 테스트</button>
+      <button>아아 마이크 테스트</button>
     </div>
   );
 };
