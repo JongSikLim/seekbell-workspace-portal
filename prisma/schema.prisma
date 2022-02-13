@@ -15,6 +15,11 @@ enum Role {
   ADMIN
 }
 
+enum OrderState {
+  PENDING
+  COMPLETED
+}
+
 model Category {
   category_id String   @id @default(uuid())
   title       String   @unique
@@ -63,6 +68,7 @@ model Cafeteria_menu {
 model Order {
   order_id        String         @id @default(uuid())
   order_date      DateTime       @default(now())
+  order_state     OrderState     @default(PENDING)
   order_user      User           @relation(fields: [user_id_fk], references: [user_id])
   Cafeteria       Cafeteria      @relation(fields: [cafeteria_id_fk], references: [cafeteria_id])
   cafeteria_id_fk String

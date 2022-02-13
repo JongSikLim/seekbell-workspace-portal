@@ -1,4 +1,5 @@
 @import '../common/color.scss';
+@import '../common/font.scss';
 
 //#region lnb
 .lnb {
@@ -9,9 +10,16 @@
     padding: 5px 20px;
     // border-bottom: 1px solid $daryNavy;
     span {
+      font-family: $roboto;
+      font-weight: bold;
       font-size: x-large;
       color: $white;
     }
   }
+
+  .subTitle {
+    color: $white;
+  }
 }
+
 //#endregion

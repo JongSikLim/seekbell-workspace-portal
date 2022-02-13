@@ -1,0 +1,22 @@
+@import './color.scss';
+@import './font.scss';
+
+.content-container {
+  height: 100%;
+  // padding: 5px 20px;
+  // background-color: $beige;
+}
+
+.header {
+  font-family: $noto;
+  font: bold;
+  color: $navy;
+  font-size: 36px;
+  padding: 5px 20px;
+
+  border-bottom: 2px solid $darkNavy;
+}
+
+.content {
+  padding: 5px 20px;
+}

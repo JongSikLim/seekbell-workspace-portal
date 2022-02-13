@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import { Methods } from 'backend/controller/type';
 
 const prisma = new PrismaClient();
 
@@ -6,6 +7,8 @@ const GET = () => {
   return prisma.cafeteria.findMany();
 };
 const POST = (item: Prisma.CafeteriaCreateInput) => {
+  console.log('item: ', item);
+  console.log(typeof item);
   return prisma.cafeteria.create({
     data: item,
   });
@@ -23,11 +26,21 @@ const DELETE = (id: string) => {
   });
 };
 
-type Methods = {
-  GET: Function;
-  POST: Function;
-  PATCH: Function;
-  DELETE: Function;
+/**
+ *
+ */
+const insertCafeteria = (
+  cafeteria: Prisma.CafeteriaCreateInput,
+  menuList: Prisma.Cafeteria_menuCreateInput[]
+) => {
+  return prisma.cafeteria.create({
+    data: {
+      ...cafeteria,
+      menus: {
+        create: menuList,
+      },
+    },
+  });
 };
 
 const category: Methods = {
@@ -35,6 +48,7 @@ const category: Methods = {
   POST,
   PATCH,
   DELETE,
+  insertCafeteria,
 };
 
 export default category;

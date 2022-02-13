@@ -2,8 +2,20 @@ import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const GET = () => {
-  return prisma.cafeteria_menu.findMany();
+const GET = (id: string) => {
+  let data;
+
+  if (id) {
+    data = prisma.cafeteria_menu.findMany({
+      where: {
+        cafeteria_id_fk: id,
+      },
+    });
+  } else {
+    data = prisma.cafeteria_menu.findMany();
+  }
+
+  return data;
 };
 const POST = (item: Prisma.Cafeteria_menuCreateInput) => {
   return prisma.cafeteria_menu.create({
