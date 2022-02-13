@@ -1,7 +1,48 @@
 @import './color.scss';
 @import './font.scss';
 
+//#region lnb
+.lnb {
+  display: flex;
+  flex-direction: column;
+  background-color: $navy;
+  height: 100%;
+
+  .title {
+    padding: 5px 20px;
+    // border-bottom: 1px solid $daryNavy;
+    span {
+      font-family: $roboto;
+      font-weight: bold;
+      font-size: x-large;
+      color: $white;
+    }
+  }
+
+  .subTitle {
+    color: $white;
+  }
+  .lnb-title {
+    height: 75px;
+  }
+  .lnb-content {
+    flex: 1;
+  }
+  .lnb-footer {
+    margin-bottom: 10px;
+
+    .icon-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+//#endregion
+
 .content-container {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   // padding: 5px 20px;
   // background-color: $beige;
@@ -18,5 +59,6 @@
 }
 
 .content {
+  flex: 1;
   padding: 5px 20px;
 }

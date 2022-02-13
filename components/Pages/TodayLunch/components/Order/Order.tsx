@@ -10,7 +10,7 @@ import {
   stepState,
 } from 'recoils/atoms/todaylunch';
 import { MenuList } from './components';
-const { Option } = Select;
+
 const Order = () => {
   const cafeteriaList = useRecoilValue(cafeteriaListState);
   const setStep = useSetRecoilState(stepState);

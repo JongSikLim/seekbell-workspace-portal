@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from 'styles/Pages/Main.module.scss';
+import Styles from 'styles/common/layout.module.scss';
 
 const Title: React.FC = () => {
   return (

@@ -1,13 +1,8 @@
 import React from 'react';
-import { useRecoilStateLoadable } from 'recoil';
-import { MenuListState } from 'recoils/atoms/main';
+import Styles from 'styles/common/layout.module.scss';
 
 const MenuBox = () => {
-  return (
-    <div>
-      <button>아아 마이크 테스트</button>
-    </div>
-  );
+  return <div className={Styles['lnb-content']}>ss</div>;
 };
 
 export default MenuBox;
