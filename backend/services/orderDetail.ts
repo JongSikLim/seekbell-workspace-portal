@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import { Methods } from 'backend/controller/type';
 
 const prisma = new PrismaClient();
 
@@ -21,13 +22,6 @@ const DELETE = (order_detail_id: string) => {
   return prisma.order_detail.delete({
     where: { order_detail_id },
   });
-};
-
-type Methods = {
-  GET: Function;
-  POST: Function;
-  PATCH: Function;
-  DELETE: Function;
 };
 
 const category: Methods = {

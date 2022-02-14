@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import commonAxios from 'utils/apiHelper';
 
 enum Page {
   SIGN_IN,
@@ -13,7 +14,19 @@ type SignInType = React.FC<{
 
 const SignIn: SignInType = ({ setPage }) => {
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    const { id, password } = values;
+
+    commonAxios
+      .post(`user/login`, {
+        id,
+        password,
+      })
+      .then((res) => {
+        console.log('res: ', res);
+      })
+      .catch((err) => {
+        message.error('계정정보가 틀렸습니다.');
+      });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -36,7 +49,7 @@ const SignIn: SignInType = ({ setPage }) => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="id"
           rules={[{ required: true, message: 'Please input your Username!' }]}
         >
           <Input
