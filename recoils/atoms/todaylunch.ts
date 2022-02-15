@@ -18,7 +18,8 @@ export const stepState = atom<Page>({
 // 식당 리스트
 export const cafeteriaListState = atom<Cafeteria[]>({
   key: 'cafeteriaListState',
-  default: commonAxios.get('/cafeteria'),
+  // default: commonAxios.get('/cafeteria'),
+  default: [],
 });
 
 export const selectCafeteriaState = atom<Cafeteria | null>({

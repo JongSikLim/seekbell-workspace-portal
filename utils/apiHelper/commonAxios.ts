@@ -7,6 +7,7 @@ import { paramSerialize as paramsSerializer } from './utils';
 
 const commonAxiosInstance = axios.create({
   baseURL: 'http://localhost:3000/api',
+  // baseURL: process.env.BACKEND_URL,
   withCredentials: true,
   headers: {
     'Content-Type': APIRequestHeaderContentTypes.form,
