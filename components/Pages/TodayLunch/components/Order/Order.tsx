@@ -20,8 +20,8 @@ const Order = () => {
    * 가게 선택 처리
    * @param value
    */
-  const handleSelectCafeteria = (_: any, option: Cafeteria) => {
-    setSelectCafeteria(option);
+  const handleSelectCafeteria = (_: any, option: Cafeteria | Cafeteria[]) => {
+    setSelectCafeteria(option as Cafeteria);
   };
 
   return (

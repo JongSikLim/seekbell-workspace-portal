@@ -8,7 +8,7 @@ const MenuBox = () => {
   return (
     <div className={Styles['lnb-content']}>
       <Collapse>
-        <Panel header="Service">
+        <Panel key="hi" header="Service">
           <p>오늘의 점심은?</p>
           <p>랜덤뽑기</p>
         </Panel>

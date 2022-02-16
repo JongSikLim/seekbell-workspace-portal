@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { category as methods } from 'backend/services';
+import { categoryService as methods } from 'backend/services';
 import { RequestMethods } from 'backend/services/types';
 
 type Data = {
@@ -12,7 +12,6 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const { method } = req;
-  console.log('method: ', method);
 
   try {
     const result = await methods[method as RequestMethods]();

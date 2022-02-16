@@ -6,7 +6,6 @@ const GET = () => {
   return prisma.category.findMany();
 };
 const POST = (item: Prisma.CategoryCreateInput) => {
-  console.log('item: ', item);
   return prisma.category.create({
     data: item,
   });

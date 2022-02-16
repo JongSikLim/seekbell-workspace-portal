@@ -8,5 +8,6 @@ export const MenuListState = atom<any>({
 
 export const orderListState = atom<any>({
   key: 'orderListState',
-  default: commonAxios.get(`/order`),
+  // default: commonAxios.get(`/order`),
+  default: null,
 });
