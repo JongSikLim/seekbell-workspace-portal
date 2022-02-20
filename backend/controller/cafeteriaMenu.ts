@@ -3,8 +3,8 @@ import { cafeteriaMenuService } from '../services';
 import { Methods } from './type';
 
 const categoryController: Methods = {
-  GET: async (id: string) => {
-    return await cafeteriaMenuService.GET(id);
+  GET: async (param: any) => {
+    return await cafeteriaMenuService.GET(param);
   },
   POST: async (item: Prisma.Cafeteria_menuCreateInput) => {
     return await cafeteriaMenuService.POST(item);

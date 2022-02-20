@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import commonAxios from 'utils/apiHelper';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { userInfoState } from 'recoils/atoms/user';
 
 enum Page {
   SIGN_IN,
@@ -13,6 +16,9 @@ type SignInType = React.FC<{
 }>;
 
 const SignIn: SignInType = ({ setPage }) => {
+  const router = useRouter();
+  const setUserInfo = useSetRecoilState(userInfoState);
+
   const onFinish = (values: any) => {
     const { id, password } = values;
 
@@ -23,14 +29,14 @@ const SignIn: SignInType = ({ setPage }) => {
       })
       .then((res) => {
         console.log('res: ', res);
+        setUserInfo((prev) => {
+          router.back();
+          return res;
+        });
       })
       .catch((err) => {
         message.error('계정정보가 틀렸습니다.');
       });
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (

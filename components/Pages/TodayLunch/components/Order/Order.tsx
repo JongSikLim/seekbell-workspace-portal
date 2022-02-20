@@ -1,29 +1,63 @@
-import { Cafeteria } from '@prisma/client';
+import { Cafeteria, Prisma } from '@prisma/client';
 import { Button, Select } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
-import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useEffect, useLayoutEffect } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   cafeteriaListState,
   Page,
-  selectCafeteriaState,
+  selectCafeteriaIdState,
   stepState,
 } from 'recoils/atoms/todaylunch';
+import { userInfoState } from 'recoils/atoms/user';
+import commonAxios from 'utils/apiHelper';
 import { MenuList } from './components';
 
+const getCafeteriaList = () => {
+  return commonAxios.get('/cafeteria');
+};
+
 const Order = () => {
-  const cafeteriaList = useRecoilValue(cafeteriaListState);
   const setStep = useSetRecoilState(stepState);
-  const setSelectCafeteria = useSetRecoilState(selectCafeteriaState);
+  const userInfo = useRecoilValue(userInfoState);
+  const [selectCafeteriaId, setSelectCafeteriaId] = useRecoilState(
+    selectCafeteriaIdState
+  );
+  const [cafeteriaList, setCafeteriaList] = useRecoilState(cafeteriaListState);
 
   /**
    * 가게 선택 처리
    * @param value
    */
-  const handleSelectCafeteria = (_: any, option: Cafeteria | Cafeteria[]) => {
-    setSelectCafeteria(option as Cafeteria);
+  const handleSelectCafeteria = (value: string) => {
+    setSelectCafeteriaId(value);
   };
 
+  const init = () => {
+    getCafeteriaList().then((res) => {
+      setCafeteriaList(res);
+    });
+  };
+
+  /**
+   * 주문시작 버튼 클릭
+   */
+  const handleCreateOrder = () => {
+    const newOrder = {
+      cafeteria_id: selectCafeteriaId,
+      order_user: userInfo,
+    };
+    commonAxios.post('order', newOrder);
+    setStep(Page.DASHBOARD);
+  };
+
+  //#region hooks
+  useLayoutEffect(() => {
+    init();
+  }, []);
+  //#endregion
+
+  //#region render
   return (
     <>
       <div
@@ -34,10 +68,10 @@ const Order = () => {
       >
         <h1>주문하기</h1>
         <ButtonGroup>
-          <Button type="primary" onClick={() => setStep(Page.HISTORY)}>
+          <Button type="primary" onClick={handleCreateOrder}>
             주문시작
           </Button>
-          <Button onClick={() => setStep(Page.HISTORY)}>취소하기</Button>
+          <Button onClick={() => setStep(Page.DASHBOARD)}>취소하기</Button>
         </ButtonGroup>
       </div>
       <div>
@@ -84,6 +118,7 @@ const Order = () => {
       </div>
     </>
   );
+  //#endregion
 };
 
 export default Order;

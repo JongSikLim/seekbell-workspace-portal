@@ -2,7 +2,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const GET = (id: string) => {
+const GET = ({ id }: any) => {
   let data;
 
   if (id) {
