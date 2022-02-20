@@ -16,7 +16,7 @@ const categoryController: Methods = {
     return await orderService.DELETE(id);
   },
   getOrderInfo: async (data: any) => {
-    return await orderService.getOrderInfo(data);
+    return await orderService.getOrderInfo();
   },
 };
 
