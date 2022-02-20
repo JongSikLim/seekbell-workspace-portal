@@ -33,7 +33,7 @@ const OrderItem: React.FC<OrderItemType> = ({ order }) => {
   } = order;
 
   const orderListElements = Order_detail.map((orderDetail, index) => {
-    return <p>{index}</p>;
+    return <p key={index}>{index}</p>;
   });
 
   const handleClickMoreview = () => {

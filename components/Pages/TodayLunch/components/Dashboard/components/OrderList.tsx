@@ -1,10 +1,9 @@
-import { Order } from '@prisma/client';
 import React from 'react';
 import { useMemo } from 'react';
 import { OrderItem } from '.';
 
 type OrderListType = {
-  orderList: Order[];
+  orderList: any[];
 };
 
 const OrderList: React.FC<OrderListType> = ({ orderList }) => {
