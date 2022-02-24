@@ -49,7 +49,7 @@ const NewCafeteria = () => {
       .post('/cafeteria/insertCafeteria', body)
       .then((res) => {
         message.success('가게 등록 완료');
-        setStep(Page.HISTORY);
+        setStep(Page.DASHBOARD);
       })
       .catch((err) => {
         message.error(err);

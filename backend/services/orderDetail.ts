@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { Methods } from 'backend/controller/type';
 
 const prisma = new PrismaClient();
@@ -6,13 +6,37 @@ const prisma = new PrismaClient();
 const GET = () => {
   return prisma.order_detail.findMany();
 };
-const POST = (item: Prisma.Order_detailCreateInput) => {
-  return prisma.order_detail.create({
-    data: item,
-  });
+
+/**
+ * 주문 추가
+ * @param item
+ * @returns
+ */
+const POST = (item: any) => {
+  const { menu_id, order_id, menu_count, user_id } = item;
+
+  try {
+    return prisma.order_detail.create({
+      data: {
+        menu_count,
+        menu_id: {
+          connect: { menu_id },
+        },
+        order_id: {
+          connect: { order_id },
+        },
+        User: {
+          connect: { user_id },
+        },
+      },
+    });
+  } catch (error) {
+    console.log('error: ', error);
+  }
 };
-const PATCH = (item: Prisma.Order_detailUpdateInput) => {
+const PATCH = (item: any) => {
   const { order_detail_id } = item;
+
   return prisma.order_detail.update({
     where: { order_detail_id: order_detail_id as string },
     data: item,

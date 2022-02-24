@@ -1,0 +1,41 @@
+@import './color.scss';
+
+.common_button {
+  background-color: $white;
+  color: $navy;
+  border-color: $navy;
+
+  &:hover {
+    color: $white;
+    background-color: $navy;
+    border-color: $navy;
+  }
+
+  &:active {
+    color: $white;
+    background-color: $navy;
+    border-color: $navy;
+  }
+}
+
+.common_button_primary {
+  background-color: $navy;
+  color: $beige;
+  border-color: $navy;
+
+  &:hover {
+    color: $navy;
+    border-color: $navy;
+  }
+}
+
+.common_button_danger {
+  background-color: $salmon;
+  color: $white;
+  border-color: $salmon;
+
+  &:hover {
+    color: $salmon;
+    border-color: $salmon;
+  }
+}

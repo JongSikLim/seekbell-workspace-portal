@@ -1,2 +1,2 @@
-import ChioceMenu from './ChioceMenu';
-export default ChioceMenu;
+import ChoiceMenu from './ChoiceMenu';
+export default ChoiceMenu;

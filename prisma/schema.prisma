@@ -39,9 +39,8 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  Order           Order[]
-  Order_detail    Order_detail? @relation(fields: [order_detail_id], references: [order_detail_id])
-  order_detail_id String?
+  Order        Order[]
+  Order_detail Order_detail[]
 }
 
 model Cafeteria {
@@ -82,7 +81,8 @@ model Order_detail {
   order_detail_id String         @id @default(uuid())
   order_id        Order          @relation(fields: [order_id_fk], references: [order_id])
   order_id_fk     String
-  User            User[] // 메뉴 주인
+  User            User           @relation(fields: [User_id], references: [user_id]) // 메뉴 주인
+  User_id         String
   menu_id         Cafeteria_menu @relation(fields: [menu_id_fk], references: [menu_id])
   menu_id_fk      String
   menu_count      Int

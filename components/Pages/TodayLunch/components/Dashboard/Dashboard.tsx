@@ -2,6 +2,7 @@ import { FieldTimeOutlined } from '@ant-design/icons';
 import { Order } from '@prisma/client';
 import { Button, Empty, Skeleton } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
+import CButton from 'components/common/CButton';
 import React, { useLayoutEffect, useMemo } from 'react';
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import { orderListState } from 'recoils/atoms/todaylunch';
@@ -10,7 +11,6 @@ import commonAxios from 'utils/apiHelper';
 import { OrderList } from './components';
 
 const Dashboard = (props: any) => {
-  console.log('props: ', props);
   const setOrderList = useSetRecoilState(orderListState);
   const { state: orderListStatus, contents: orderListContents } =
     useRecoilValueLoadable<Order[]>(orderListState);
@@ -41,6 +41,7 @@ const Dashboard = (props: any) => {
 
   useLayoutEffect(() => {
     commonAxios.get('order/getOrderInfo').then((res) => {
+      console.log('res: ', res);
       setOrderList(res);
     });
   }, []);
@@ -55,10 +56,12 @@ const Dashboard = (props: any) => {
       >
         <h1></h1>
         <ButtonGroup>
-          <Button icon={<FieldTimeOutlined />}>히스토리</Button>
-          <Button type="primary" onClick={() => setStep(Page.ORDER)}>
+          <CButton icon={<FieldTimeOutlined />} handleClick={() => {}}>
+            히스토리
+          </CButton>
+          <CButton type="primary" handleClick={() => setStep(Page.ORDER)}>
             주문하기
-          </Button>
+          </CButton>
         </ButtonGroup>
       </div>
       <div>
@@ -68,11 +71,12 @@ const Dashboard = (props: any) => {
         </div>
         <div className="row-box">
           <h1>어제 주문한 내역</h1>
-          <div>{orderElements}</div>
+          <Empty />
+          {/* <div>{orderElements}</div> */}
         </div>
         <div className="row-box">
           <h1>오래된 내역</h1>
-          <div>{orderElements}</div>
+          <Empty />
         </div>
       </div>
     </>

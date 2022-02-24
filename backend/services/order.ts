@@ -20,7 +20,22 @@ const getOrderInfo = async () => {
           name: true,
         },
       },
-      Order_detail: true,
+      Order_detail: {
+        select: {
+          order_detail_id: true,
+          User: {
+            select: {
+              name: true,
+            },
+          },
+          menu_id: {
+            select: {
+              menu_title: true,
+              price: true,
+            },
+          },
+        },
+      },
     },
     // include: {
     //   Cafeteria: true,
@@ -42,7 +57,7 @@ const POST = (item: any) => {
       data: {
         Cafeteria: {
           connect: {
-            cafeteria_id: item.Cafeteria.cafeteria_id,
+            cafeteria_id: item.cafeteria_id,
           },
         },
         order_user: {

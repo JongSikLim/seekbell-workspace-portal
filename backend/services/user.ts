@@ -1,6 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { Methods } from 'backend/controller/type';
-import { createHashedPassword, makeHashedPassword } from 'utils/passwordUtils';
+import { makeHashedPassword } from 'utils/passwordUtils';
 
 const prisma = new PrismaClient();
 
@@ -45,7 +44,6 @@ const login = ({ id, password }: { id: string; password: string }) => {
         const { salt, password: _password } = res;
 
         makeHashedPassword(password, salt).then((hashedPassword) => {
-          console.log('hashedPassword: ', hashedPassword);
           if (hashedPassword === _password) {
             prisma.user
               .findUnique({

@@ -19,6 +19,7 @@ export default async function handler(
     const service = slug[0];
     const router = slug[1] === undefined ? (method as string) : slug[1];
     const targetController = cList[`${service}Controller`];
+
     let result;
 
     // url로, (쿼리) 파라미터 받아야하는 놈들

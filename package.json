@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start:prod": "pm2 start npm --name 'next' -- start",
+    "start:prod": "yarn && pm2 start npm --name 'next' -- start",
     "db:migrate": "npx prisma migrate dev --name "
   },
   "dependencies": {

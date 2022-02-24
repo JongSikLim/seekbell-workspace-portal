@@ -3,9 +3,14 @@ import React, { useLayoutEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Page, stepState } from 'recoils/atoms/todaylunch';
 import { userInfoState } from 'recoils/atoms/user';
-import { Dashboard, History, Order } from './components';
-import ChioceMenu from './components/ChoiceMenu';
-import NewCafeteria from './components/NewCafeteria';
+import {
+  Dashboard,
+  History,
+  NewCafeteria,
+  Order,
+  ChoiceMenu,
+} from './components';
+import OrderInfo from './components/OrderInfo';
 
 const TodayLunch = (props: any) => {
   const router = useRouter();
@@ -20,12 +25,13 @@ const TodayLunch = (props: any) => {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       {step === Page.DASHBOARD && <Dashboard />}
       {step === Page.HISTORY && <History />}
       {step === Page.ORDER && <Order />}
       {step === Page.NEW_CAFETERIA && <NewCafeteria />}
-      {step === Page.CHOICE_MENU && <ChioceMenu />}
+      {step === Page.CHOICE_MENU && <ChoiceMenu />}
+      {step === Page.ORDER_INFO && <OrderInfo />}
     </div>
   );
 };
