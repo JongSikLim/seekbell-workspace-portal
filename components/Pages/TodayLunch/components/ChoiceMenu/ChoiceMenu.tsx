@@ -49,7 +49,13 @@ const ChoiceMenu = () => {
         if (contents.length > 0) {
           _data = contents.map((menu: Cafeteria_menu) => {
             const handleClick = () => setSelectedMenu(menu);
-            return <ChoiceMenuItem menu={menu} handleClick={handleClick} />;
+            return (
+              <ChoiceMenuItem
+                key={menu.menu_id}
+                menu={menu}
+                handleClick={handleClick}
+              />
+            );
           });
         } else {
           _data = <Empty />;
