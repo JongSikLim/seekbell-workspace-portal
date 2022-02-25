@@ -40,6 +40,24 @@
   }
 }
 
+// #region <Dashboard/>
+.order_card_row {
+  display: flex; 
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+// #endregion
+
+
+// #region <OrderItem/>
+#orderItemCard{
+  flex : 0 0 auto;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  border-color: $darkNavy;
+}
+// #endregion
+
 // #region <MenuInfo/>
 .menu_info {
   width: 50%;
@@ -82,5 +100,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+//#endregion
+
+
+//#region <OrderInfo/>
+#orderInfoList {
+  height: 365px;
+  overflow-y: auto;
+  padding: 0 10px;
 }
 //#endregion

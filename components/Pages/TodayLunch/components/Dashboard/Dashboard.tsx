@@ -3,21 +3,28 @@ import { Order } from '@prisma/client';
 import { Button, Empty, Skeleton } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
 import CButton from 'components/common/CButton';
-import React, { useLayoutEffect, useMemo } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo } from 'react';
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import { orderListState } from 'recoils/atoms/todaylunch';
 import { Page, stepState } from 'recoils/atoms/todaylunch';
 import commonAxios from 'utils/apiHelper';
+import Styles from 'styles/Pages/TodayLunch.module.scss';
 import { OrderList } from './components';
 
 const Dashboard = (props: any) => {
+  //#region states
   const setOrderList = useSetRecoilState(orderListState);
   const { state: orderListStatus, contents: orderListContents } =
     useRecoilValueLoadable<Order[]>(orderListState);
-
   const setStep = useSetRecoilState(stepState);
+  //#endregion
 
-  const orderElements = useMemo(() => {
+
+  //#region hooks
+  /**
+   * 주문 요소 리스트
+   */
+  const activateOrderElements = useMemo(() => {
     let _elements;
 
     switch (orderListStatus) {
@@ -37,14 +44,14 @@ const Dashboard = (props: any) => {
     }
 
     return _elements;
-  }, [orderListStatus]);
+  }, [orderListStatus, orderListContents]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     commonAxios.get('order/getOrderInfo').then((res) => {
-      console.log('res: ', res);
       setOrderList(res);
     });
   }, []);
+  //#endregion
 
   return (
     <>
@@ -56,7 +63,7 @@ const Dashboard = (props: any) => {
       >
         <h1></h1>
         <ButtonGroup>
-          <CButton icon={<FieldTimeOutlined />} handleClick={() => {}}>
+          <CButton icon={<FieldTimeOutlined />} handleClick={() => { }}>
             히스토리
           </CButton>
           <CButton type="primary" handleClick={() => setStep(Page.ORDER)}>
@@ -67,7 +74,7 @@ const Dashboard = (props: any) => {
       <div>
         <div className="row-box">
           <h1>주문 중인 내역</h1>
-          <div>{orderElements}</div>
+          <div className={Styles.order_card_row}>{activateOrderElements}</div>
         </div>
         <div className="row-box">
           <h1>어제 주문한 내역</h1>

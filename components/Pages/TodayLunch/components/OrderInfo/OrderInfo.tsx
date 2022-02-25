@@ -26,7 +26,7 @@ const OrderInfo = () => {
   /**
    *
    */
-  const handleClickFinishOrder = () => {};
+  const handleClickFinishOrder = () => { };
 
   return (
     <div style={{ height: '100%' }}>
@@ -41,6 +41,7 @@ const OrderInfo = () => {
       <div style={{ width: '50%' }}>
         <h2>주문현황</h2>
         <List
+          id={Styles.orderInfoList}
           itemLayout="horizontal"
           dataSource={Order_detail}
           renderItem={(orderDetail: any) => (

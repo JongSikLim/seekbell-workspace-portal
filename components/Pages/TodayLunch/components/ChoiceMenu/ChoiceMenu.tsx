@@ -1,5 +1,5 @@
 import { Cafeteria_menu, User } from '@prisma/client';
-import { Empty, Skeleton } from 'antd';
+import { Empty, message, Skeleton } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
 import CButton from 'components/common/CButton';
 import { useMemo, useState, useEffect } from 'react';
@@ -35,7 +35,11 @@ const ChoiceMenu = () => {
       user_id: user_id,
     };
 
-    commonAxios.post('/orderDetail', body);
+    commonAxios.post('/orderDetail', body).then(res => {
+      message.success('주문 완료하였습니다.')
+    });
+
+    setStep(Page.DASHBOARD)
   };
 
   const optionElements = useMemo(() => {

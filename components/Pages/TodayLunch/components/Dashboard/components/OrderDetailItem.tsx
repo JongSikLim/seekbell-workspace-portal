@@ -28,7 +28,7 @@ const OrderDetailItem: React.FC<OrderDetailItemProps> = ({ orderDetail }) => {
         <span>{name}</span>
       </div>
 
-      <div>
+      <div style={{ textAlign: 'right' }}>
         <TextField width={100}>{menu_title}</TextField>
         {/* {menu_title} */}
       </div>
