@@ -3,7 +3,6 @@ import { HeadWrapper } from 'components/common';
 import { orderService } from 'backend/services';
 
 const TodayLunch = (props: any) => {
-  console.log('props: ', props);
   return (
     <>
       <HeadWrapper />

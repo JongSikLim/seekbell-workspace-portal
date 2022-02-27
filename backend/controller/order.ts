@@ -12,11 +12,20 @@ const categoryController: Methods = {
   PATCH: async (item: Prisma.OrderUpdateInput) => {
     return await orderService.PATCH(item);
   },
-  DELETE: async (id: string) => {
-    return await orderService.DELETE(id);
+  DELETE: async (param: any) => {
+    return await orderService.DELETE(param);
   },
   getOrderInfo: async (data: any) => {
     return await orderService.getOrderInfo();
+  },
+  yesterdayOrderInfo: async () => {
+    return await orderService.yesterdayOrderInfo();
+  },
+  todayOrderInfo: async () => {
+    return await orderService.todayOrderInfo();
+  },
+  timeTrigger: async () => {
+    return await orderService.timeTrigger();
   },
 };
 

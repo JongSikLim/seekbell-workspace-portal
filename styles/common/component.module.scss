@@ -5,15 +5,16 @@
   color: $navy;
   border-color: $navy;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: $white;
     background-color: $navy;
     border-color: $navy;
   }
 
-  &:active {
-    color: $white;
-    background-color: $navy;
+  &:focus {
+    background-color: $white;
+    color: $navy;
     border-color: $navy;
   }
 }
@@ -23,19 +24,50 @@
   color: $beige;
   border-color: $navy;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: $navy;
+    border-color: $navy;
+  }
+
+  &:focus {
+    background-color: $navy;
+    color: $beige;
     border-color: $navy;
   }
 }
 
 .common_button_danger {
-  background-color: $salmon;
-  color: $white;
-  border-color: $salmon;
+  background-color: $white;
+  color: $red;
+  border-color: $red;
 
-  &:hover {
-    color: $salmon;
-    border-color: $salmon;
+  &:hover,
+  &:active {
+    color: $white;
+    border-color: $red;
+    background-color: $red;
+  }
+  &:focus {
+    background-color: $white;
+    color: $red;
+    border-color: $red;
+  }
+}
+
+.common_button_danger_primary {
+  background-color: $red;
+  color: $white;
+  border-color: $red;
+
+  &:hover,
+  &:active {
+    color: $red;
+    border-color: $red;
+  }
+  &:focus {
+    background-color: $red;
+    color: $white;
+    border-color: $red;
   }
 }

@@ -1,10 +1,12 @@
 import { Button, Input, message } from 'antd';
+import { CButton } from 'components/common';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Page, stepState } from 'recoils/atoms/todaylunch';
 import commonAxios from 'utils/apiHelper';
 import { v1 } from 'uuid';
 import { Menu } from '../../type';
+import { Header, SubHeader } from '../common';
 import MenuList from './MenuList';
 
 const NewCafeteria = () => {
@@ -29,8 +31,10 @@ const NewCafeteria = () => {
    */
   const handleInsertCafeteria = () => {
     // validation
-    if (checkValidation() === false)
+    if (checkValidation() === false) {
       message.error('데이터 양식을 확인해주세요.');
+      return;
+    }
     // cafeteria insert API 호출
     const cafeteriaForApi = {
       cafeteria_name: cafeName,
@@ -69,7 +73,7 @@ const NewCafeteria = () => {
 
     if (
       menuList.some((menu) => {
-        menu.name === '' || menu.price === 0;
+        return [null, ''].includes(menu.name) || [null, 0].includes(menu.price);
       })
     ) {
       validResult = false;
@@ -78,28 +82,60 @@ const NewCafeteria = () => {
     return validResult;
   };
 
+  const handleDeleteMenu = (id: string) => () => {
+    setMenuList((prev) =>
+      prev.filter((menu) => {
+        if (menu.id === id) {
+          return false;
+        } else return true;
+      })
+    );
+  };
+
   return (
-    <div style={{ width: '50%', minWidth: '300px' }}>
-      <div style={{ display: 'flex', marginBottom: 20 }}>
-        <Input
-          type={'text'}
-          value={cafeName}
-          onChange={(e) => setCafeName(e.target.value)}
-        />
-        <Button type="primary" onClick={handleInsertCafeteria}>
-          가게등록
-        </Button>
-      </div>
-      <hr />
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>
-            <h3>메뉴항목</h3>
-          </div>
-          <Button onClick={handleInsertMenu}>메뉴추가</Button>
+    <div style={{ height: '100%' }}>
+      <Header
+        title={'가게등록'}
+        buttons={[
+          {
+            text: '취소하기',
+            type: 'danger',
+            onClick: () => setStep(Page.DASHBOARD),
+          },
+        ]}
+      />
+      <div style={{ width: '50%', minWidth: '300px' }}>
+        <div style={{ display: 'flex', marginBottom: 20 }}>
+          <Input
+            type={'text'}
+            placeholder="가게명을 등록해주세요"
+            value={cafeName}
+            onChange={(e) => setCafeName(e.target.value)}
+          />
         </div>
-        <hr />
-        <MenuList {...{ menuList }} handleChangeMenuList={setMenuList} />
+        <div>
+          <div style={{ width: '50%' }}>
+            <SubHeader
+              subTitle="메뉴항목"
+              buttons={[
+                {
+                  text: '가게등록',
+                  // type: 'primary',
+                  onClick: () => handleInsertCafeteria(),
+                },
+              ]}
+            />
+            <hr />
+            <MenuList
+              {...{ menuList }}
+              handleChangeMenuList={setMenuList}
+              handleDeleteMenu={handleDeleteMenu}
+            />
+            <CButton type="primary" block={true} handleClick={handleInsertMenu}>
+              메뉴추가
+            </CButton>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -25,14 +25,14 @@ const TodayLunch = (props: any) => {
   }, []);
 
   return (
-    <div style={{ height: '100%' }}>
+    <>
       {step === Page.DASHBOARD && <Dashboard />}
       {step === Page.HISTORY && <History />}
       {step === Page.ORDER && <Order />}
       {step === Page.NEW_CAFETERIA && <NewCafeteria />}
       {step === Page.CHOICE_MENU && <ChoiceMenu />}
       {step === Page.ORDER_INFO && <OrderInfo />}
-    </div>
+    </>
   );
 };
 

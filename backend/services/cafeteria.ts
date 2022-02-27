@@ -7,8 +7,6 @@ const GET = () => {
   return prisma.cafeteria.findMany();
 };
 const POST = (item: Prisma.CafeteriaCreateInput) => {
-  console.log('item: ', item);
-  console.log(typeof item);
   return prisma.cafeteria.create({
     data: item,
   });

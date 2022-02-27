@@ -1,11 +1,16 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import schedule from 'node-schedule';
 
 /**
  * index.tsx 에서 서버관련된 커스텀 설정을 한다.
  * @returns
  */
 const Home: NextPage = () => {
+  schedule.scheduleJob('*/5 * * * * *', () => {
+    console.log('hai..');
+  });
+
   //#region render
   return (
     <div>

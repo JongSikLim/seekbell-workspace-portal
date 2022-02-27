@@ -43,9 +43,8 @@
 .content-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
-  // padding: 5px 20px;
-  // background-color: $beige;
 }
 
 .header {
@@ -61,4 +60,6 @@
 .content {
   flex: 1;
   padding: 5px 20px;
+  // width: calc(100% - 20px);
+  width: calc(100%);
 }

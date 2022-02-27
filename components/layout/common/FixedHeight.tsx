@@ -8,8 +8,9 @@ const FixedHeight: FixedHeightType = ({ children }) => {
   return (
     <div
       style={{
+        width: '100vw',
         height: '100vh',
-        overflowY: 'hidden',
+        overflow: 'hidden',
       }}
     >
       {children}

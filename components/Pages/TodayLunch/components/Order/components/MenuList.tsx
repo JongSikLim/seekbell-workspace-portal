@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 import { cafeteriaMenuState } from 'recoils/selectors/todaylunch';
 import { MenuItem } from '.';
+import Styles from 'styles/Pages/TodayLunch.module.scss';
 
 const MenuList = () => {
   const { state, contents } =
@@ -26,9 +27,9 @@ const MenuList = () => {
     }
 
     return _element;
-  }, [state]);
+  }, [state, contents]);
 
-  return <div>{menuListElements}</div>;
+  return <div className={Styles.menu_list}>{menuListElements}</div>;
 };
 
 export default MenuList;

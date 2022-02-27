@@ -11,7 +11,6 @@ export default async function handler(
 ) {
   const { method, body = {}, query } = req;
   const { slug } = query;
-
   const cList: { [key in string]: any } = {
     ...controllerList,
   };
@@ -31,6 +30,7 @@ export default async function handler(
       const data = JSON.parse(body);
       result = await targetController[router](data);
     }
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).end(error);

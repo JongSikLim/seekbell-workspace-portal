@@ -4,10 +4,10 @@ import Styles from 'styles/Pages/TodayLunch.module.scss';
 
 type OrderDetailItemProps = {
   orderDetail: {
-    User: {
+    user: {
       name: string;
     };
-    menu_id: {
+    menu: {
       menu_title: string;
       price: number;
     };
@@ -17,8 +17,8 @@ type OrderDetailItemProps = {
 
 const OrderDetailItem: React.FC<OrderDetailItemProps> = ({ orderDetail }) => {
   const {
-    User: { name },
-    menu_id: { menu_title, price },
+    user: { name },
+    menu: { menu_title, price },
   } = orderDetail;
 
   return (

@@ -1,47 +1,112 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import moment, { Moment } from 'moment';
 
 const prisma = new PrismaClient();
 
-const getOrderInfo = async () => {
-  const orderList = await prisma.order.findMany({
+const selectOption = {
+  order_id: true,
+  order_state: true,
+  order_date: true,
+  cafeteria: {
     select: {
-      order_id: true,
-      order_state: true,
-      order_date: true,
-      Cafeteria: {
+      cafeteria_id: true,
+      cafeteria_name: true,
+    },
+  },
+  user: {
+    select: {
+      user_id: true,
+      name: true,
+    },
+  },
+  orderDetails: {
+    select: {
+      order_detail_id: true,
+      user: {
         select: {
-          cafeteria_id: true,
-          cafeteria_name: true,
-        },
-      },
-      order_user: {
-        select: {
-          user_id: true,
           name: true,
         },
       },
-      Order_detail: {
+      menu: {
         select: {
-          order_detail_id: true,
-          User: {
-            select: {
-              name: true,
-            },
-          },
-          menu_id: {
-            select: {
-              menu_title: true,
-              price: true,
-            },
-          },
+          menu_title: true,
+          price: true,
         },
       },
     },
-    // include: {
-    //   Cafeteria: true,
-    //   Order_detail: true,
-    //   order_user: true,
-    // },
+  },
+};
+
+const timeTrigger = async () => {
+  const date = moment().toDate();
+
+  const result = await prisma.order.updateMany({
+    data: {
+      order_state: 'COMPLETED',
+    },
+    where: {
+      AND: [
+        {
+          order_state: 'PENDING',
+        },
+        {
+          order_date: {
+            lte: date,
+          },
+        },
+      ],
+    },
+  });
+
+  return result;
+};
+
+const getOrderInfo = async () => {
+  const orderList = await prisma.order.findMany({
+    select: selectOption,
+    orderBy: {
+      order_state: 'asc',
+    },
+  });
+
+  return orderList;
+};
+
+const yesterdayOrderInfo = async () => {
+  const yesterdayStart = moment().subtract(1, 'days').startOf('day').toDate();
+  const yesterdayEnd = moment().subtract(1, 'days').endOf('day').toDate();
+
+  const orderList = await prisma.order.findMany({
+    select: selectOption,
+    where: {
+      order_date: {
+        gte: yesterdayStart,
+        lte: yesterdayEnd,
+      },
+    },
+    orderBy: {
+      order_state: 'asc',
+    },
+  });
+
+  return orderList;
+};
+
+const todayOrderInfo = async () => {
+  const todayStart = moment().startOf('day').toDate();
+  const todayEnd = moment().endOf('day').toDate();
+
+  const orderList = await prisma.order.findMany({
+    select: selectOption,
+    where: {
+      order_date: {
+        gte: todayStart,
+        lte: todayEnd,
+      },
+    },
+    orderBy: {
+      order_state: 'asc',
+    },
   });
 
   return orderList;
@@ -55,20 +120,21 @@ const POST = (item: any) => {
   try {
     return prisma.order.create({
       data: {
-        Cafeteria: {
+        order_date: item.order_date,
+        cafeteria: {
           connect: {
             cafeteria_id: item.cafeteria_id,
           },
         },
-        order_user: {
+        user: {
           connect: {
             user_id: item.order_user.user_id,
           },
         },
       },
       include: {
-        Cafeteria: true,
-        order_user: true,
+        cafeteria: true,
+        user: true,
       },
     });
   } catch (error) {
@@ -76,7 +142,7 @@ const POST = (item: any) => {
   }
 };
 
-const PATCH = (item: Prisma.OrderUpdateInput) => {
+const PATCH = (item: any) => {
   const { order_id } = item;
   return prisma.order.update({
     where: { order_id: order_id as string },
@@ -84,13 +150,20 @@ const PATCH = (item: Prisma.OrderUpdateInput) => {
   });
 };
 
-const DELETE = (order_id: string) => {
+const DELETE = (param: { order_id: string }) => {
+  const { order_id } = param;
+
   return prisma.order.delete({
-    where: { order_id },
+    where: {
+      order_id,
+    },
   });
 };
 
 const category = {
+  timeTrigger,
+  yesterdayOrderInfo,
+  todayOrderInfo,
   getOrderInfo,
   GET,
   POST,

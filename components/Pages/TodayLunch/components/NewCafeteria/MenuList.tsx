@@ -5,9 +5,14 @@ import MenuItem from './MenuItem';
 type MenuListType = React.FC<{
   menuList: Menu[];
   handleChangeMenuList: React.Dispatch<React.SetStateAction<Menu[]>>;
+  handleDeleteMenu: (id: string) => () => void;
 }>;
 
-const MenuList: MenuListType = ({ menuList, handleChangeMenuList }) => {
+const MenuList: MenuListType = ({
+  menuList,
+  handleChangeMenuList,
+  handleDeleteMenu,
+}) => {
   const menuListElements = useMemo(() => {
     return menuList.map((menu) => {
       const handleChangeMenu =
@@ -29,6 +34,7 @@ const MenuList: MenuListType = ({ menuList, handleChangeMenuList }) => {
           key={menu.id}
           menu={menu}
           handleChangeMenu={handleChangeMenu}
+          handleDeleteMenu={handleDeleteMenu(menu.id)}
         />
       );
     });

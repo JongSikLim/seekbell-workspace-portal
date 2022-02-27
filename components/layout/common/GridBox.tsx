@@ -6,7 +6,11 @@ type GridBoxProps = {
 
 const GridBox: React.FC<GridBoxProps> = (props) => {
   const { children } = props;
-  return <div style={{ display: 'flex', height: '100%' }}>{children}</div>;
+  return (
+    <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+      {children}
+    </div>
+  );
 };
 
 export default GridBox;

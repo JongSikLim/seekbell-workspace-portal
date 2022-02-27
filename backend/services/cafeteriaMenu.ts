@@ -8,7 +8,7 @@ const GET = ({ id }: any) => {
   if (id) {
     data = prisma.cafeteria_menu.findMany({
       where: {
-        cafeteria_id_fk: id,
+        cafeteria_id: id,
       },
     });
   } else {
@@ -29,7 +29,7 @@ const PATCH = (item: Prisma.Cafeteria_menuUpdateInput) => {
     data: item,
   });
 };
-const DELETE = (menu_id: string) => {
+const DELETE = ({ menu_id }: any) => {
   return prisma.cafeteria_menu.delete({
     where: { menu_id },
   });

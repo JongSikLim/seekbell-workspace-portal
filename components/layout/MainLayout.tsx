@@ -12,7 +12,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
   return (
     <FixedHeight>
       <GridBox>
-        <Grid flex={2} minWidth={400}>
+        <Grid flex={2} minWidth={200}>
           <LNB>
             <></>
           </LNB>

@@ -1,7 +1,6 @@
-import { Cafeteria, Prisma } from '@prisma/client';
-import { Button, Select } from 'antd';
-import ButtonGroup from 'antd/lib/button/button-group';
-import { useEffect, useLayoutEffect } from 'react';
+import { Button, Select, TimePicker } from 'antd';
+import moment, { Moment } from 'moment';
+import { useLayoutEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   cafeteriaListState,
@@ -11,6 +10,7 @@ import {
 } from 'recoils/atoms/todaylunch';
 import { userInfoState } from 'recoils/atoms/user';
 import commonAxios from 'utils/apiHelper';
+import { Header } from '../common';
 import { MenuList } from './components';
 
 const getCafeteriaList = () => {
@@ -24,7 +24,7 @@ const Order = () => {
     selectCafeteriaIdState
   );
   const [cafeteriaList, setCafeteriaList] = useRecoilState(cafeteriaListState);
-
+  let selectTimeRef = useRef<Date | null>(null);
   /**
    * 가게 선택 처리
    * @param value
@@ -46,9 +46,14 @@ const Order = () => {
     const newOrder = {
       cafeteria_id: selectCafeteriaId,
       order_user: userInfo,
+      order_date: selectTimeRef.current,
     };
     commonAxios.post('order', newOrder);
     setStep(Page.DASHBOARD);
+  };
+
+  const handleTimeChange = (time: Moment | null, timeString: string) => {
+    selectTimeRef.current = (time as Moment).toDate();
   };
 
   //#region hooks
@@ -59,64 +64,75 @@ const Order = () => {
 
   //#region render
   return (
-    <>
-      <div
+    <div style={{ height: '100%' }}>
+      <Header
+        title={'파티열기'}
+        buttons={[
+          { text: '주문시작', onClick: handleCreateOrder },
+          {
+            text: '취소하기',
+            type: 'danger',
+            onClick: () => setStep(Page.DASHBOARD),
+          },
+        ]}
+      />
+      <Select
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
+          width: 300,
         }}
-      >
-        <h1>주문하기</h1>
-        <ButtonGroup>
-          <Button type="primary" onClick={handleCreateOrder}>
-            주문시작
-          </Button>
-          <Button onClick={() => setStep(Page.DASHBOARD)}>취소하기</Button>
-        </ButtonGroup>
-      </div>
-      <div>
-        <Select
-          style={{
-            width: 300,
-          }}
-          size="large"
-          showSearch
-          placeholder="가게 고르세요"
-          fieldNames={{ label: 'cafeteria_name', value: 'cafeteria_id' }}
-          optionFilterProp="cafeteria_name"
-          optionLabelProp="cafeteria_name"
-          // value={cafeteriaList}
-          options={cafeteriaList}
-          onChange={handleSelectCafeteria}
-          filterOption={(input, option) =>
-            //@ts-ignore
-            option['cafeteria_name']
-              .toLowerCase()
-              .indexOf(input.toLowerCase()) >= 0
-          }
-          dropdownRender={(menu) => (
-            <>
-              <div>{menu} </div>
-              <hr />
-              <div style={{ paddingLeft: '10', paddingRight: '10' }}>
-                <Button
-                  block
-                  type="primary"
-                  onClick={() => setStep(Page.NEW_CAFETERIA)}
-                >
-                  가게 추가
-                </Button>
-              </div>
-            </>
-          )}
-        ></Select>
-      </div>
+        size="large"
+        showSearch
+        placeholder="가게 고르세요"
+        fieldNames={{ label: 'cafeteria_name', value: 'cafeteria_id' }}
+        optionFilterProp="cafeteria_name"
+        optionLabelProp="cafeteria_name"
+        // value={cafeteriaList}
+        options={cafeteriaList}
+        onChange={handleSelectCafeteria}
+        filterOption={(input, option) =>
+          //@ts-ignore
+          option['cafeteria_name'].toLowerCase().indexOf(input.toLowerCase()) >=
+          0
+        }
+        dropdownRender={(menu) => (
+          <>
+            <div>{menu} </div>
+            <hr />
+            <div style={{ paddingLeft: '10', paddingRight: '10' }}>
+              <Button
+                block
+                type="primary"
+                onClick={() => setStep(Page.NEW_CAFETERIA)}
+              >
+                가게 추가
+              </Button>
+            </div>
+          </>
+        )}
+      />
+      <TimePicker
+        placeholder="주문만료시간"
+        use12Hours
+        format={'h:mm a'}
+        size="large"
+        minuteStep={5}
+        defaultValue={moment()}
+        onChange={handleTimeChange}
+      />
+
       <hr />
       <div>
         <h2>메뉴리스트</h2>
-        <MenuList />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <MenuList />
+        </div>
       </div>
-    </>
+    </div>
   );
   //#endregion
 };

@@ -3,17 +3,35 @@
 .common_header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+  > span {
+    font-size: 2em;
+  }
 }
 
+// #region <SubHeader/>
+.sub_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  > span {
+    font-size: 1.5em;
+  }
+}
+// #endregion
+
+// #region <ChoiceMenu/>
 .choice_menu_content {
   display: flex;
   justify-content: space-between;
 }
 
 .choice_menu {
-  width: 40%;
-  height: 80%;
+  width: 100%;
+  padding-right: 10px;
+  max-height: 600px;
   overflow-y: auto;
+  margin-bottom: 10px;
 }
 
 .choice_menu_item {
@@ -39,21 +57,34 @@
     color: $white;
   }
 }
+// #endregion <ChoiceMenu/>
 
 // #region <Dashboard/>
+.scroll_box {
+  height: 90%;
+  overflow-y: auto;
+}
+
+.row_box {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
 .order_card_row {
-  display: flex; 
+  display: flex;
+  align-items: flex-start;
   flex-wrap: nowrap;
   overflow-x: auto;
+  height: 285px;
+  width: 100%;
 }
 // #endregion
 
-
 // #region <OrderItem/>
-#orderItemCard{
-  flex : 0 0 auto;
-  margin-bottom: 5px;
+#orderItemCard {
+  flex: 0 0 auto;
   margin-right: 10px;
+  max-height: 270px;
   border-color: $darkNavy;
 }
 // #endregion
@@ -77,6 +108,43 @@
   margin-bottom: 30px;
 }
 //#endregion
+
+// #region <MenuList/>
+.menu_list {
+  width: 50%;
+  max-height: 600px;
+  overflow: auto;
+  padding: 0 5px;
+  padding-bottom: 50px;
+}
+// #endregion
+
+// #region <MenuItem/>
+.menu_item {
+  padding: 0 20px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $navy;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.menu_info_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu_title {
+  color: $navy;
+  font-weight: bold;
+  font-size: large;
+}
+// #endregion
 
 //#region <OrderDetailItem/>
 .order_detail_item {
@@ -102,7 +170,6 @@
   white-space: nowrap;
 }
 //#endregion
-
 
 //#region <OrderInfo/>
 #orderInfoList {

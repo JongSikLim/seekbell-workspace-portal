@@ -19,13 +19,13 @@ const POST = (item: any) => {
     return prisma.order_detail.create({
       data: {
         menu_count,
-        menu_id: {
+        menu: {
           connect: { menu_id },
         },
-        order_id: {
+        order: {
           connect: { order_id },
         },
-        User: {
+        user: {
           connect: { user_id },
         },
       },

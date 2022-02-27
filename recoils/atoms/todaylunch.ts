@@ -37,3 +37,9 @@ export const orderListState = atom<Order[]>({
   key: 'orderListState',
   default: [],
 });
+
+// 가게메뉴 새로고침 토큰
+export const menuRefreshTokenState = atom<string>({
+  key: 'menuRefreshTokenState',
+  default: '',
+});

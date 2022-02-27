@@ -9,7 +9,7 @@ const Grid: React.FC<GridProps> = (props) => {
   return (
     <div
       style={{
-        flex,
+        width: `${flex}0%`,
         minWidth,
         height: '100%',
       }}

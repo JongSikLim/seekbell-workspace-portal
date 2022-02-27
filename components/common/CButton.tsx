@@ -1,17 +1,21 @@
 import { Button } from 'antd';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import CommonStyles from 'styles/common/component.module.scss';
 
-type CButtonType = {
+export type CButtonType = 'primary' | 'danger';
+
+type CButtonProps = {
   icon?: JSX.Element;
-  type?: 'primary' | 'danger';
-  handleClick: () => void;
+  type?: CButtonType;
+  block?: boolean;
+  handleClick: (e: React.MouseEvent) => void;
   children: React.ReactNode;
 };
 
-const CButton: React.FC<CButtonType> = ({
+const CButton: React.FC<CButtonProps> = ({
   icon,
   type,
+  block = false,
   handleClick,
   children,
 }) => {
@@ -34,7 +38,12 @@ const CButton: React.FC<CButtonType> = ({
   }, [type]);
 
   return (
-    <Button className={buttonClassName} onClick={handleClick} icon={icon}>
+    <Button
+      className={buttonClassName}
+      icon={icon}
+      block={block}
+      onClick={handleClick}
+    >
       {children}
     </Button>
   );
