@@ -1,4 +1,4 @@
-import { Button, Select, TimePicker } from 'antd';
+import { Button, message, Select, TimePicker } from 'antd';
 import moment, { Moment } from 'moment';
 import { useLayoutEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -48,8 +48,15 @@ const Order = () => {
       order_user: userInfo,
       order_date: selectTimeRef.current,
     };
-    commonAxios.post('order', newOrder);
-    setStep(Page.DASHBOARD);
+    commonAxios
+      .post('order', newOrder)
+      .then((res) => {
+        message.success('주문접수 시작');
+        setStep(Page.DASHBOARD);
+      })
+      .catch((err) => {
+        message.error('주문실패');
+      });
   };
 
   const handleTimeChange = (time: Moment | null, timeString: string) => {

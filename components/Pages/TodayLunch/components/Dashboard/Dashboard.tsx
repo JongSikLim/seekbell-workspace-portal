@@ -48,6 +48,11 @@ const Dashboard = () => {
     commonAxios.get('order/yesterdayOrderInfo').then((res) => {
       setYesterdayOrderList(res);
     });
+
+    return () => {
+      setTodayOrderList([]);
+      setYesterdayOrderList([]);
+    };
   }, []);
   //#endregion
 

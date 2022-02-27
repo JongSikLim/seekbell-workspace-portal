@@ -30,7 +30,7 @@
   width: 100%;
   padding-right: 10px;
   max-height: 600px;
-  overflow-y: auto;
+  // overflow-y: auto;
   margin-bottom: 10px;
 }
 
@@ -61,8 +61,6 @@
 
 // #region <Dashboard/>
 .scroll_box {
-  height: 90%;
-  overflow-y: auto;
 }
 
 .row_box {
@@ -75,7 +73,7 @@
   align-items: flex-start;
   flex-wrap: nowrap;
   overflow-x: auto;
-  height: 285px;
+  height: 310px;
   width: 100%;
 }
 // #endregion
@@ -84,7 +82,7 @@
 #orderItemCard {
   flex: 0 0 auto;
   margin-right: 10px;
-  max-height: 270px;
+  max-height: 290px;
   border-color: $darkNavy;
 }
 // #endregion

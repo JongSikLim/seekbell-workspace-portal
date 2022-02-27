@@ -84,9 +84,12 @@ const yesterdayOrderInfo = async () => {
         lte: yesterdayEnd,
       },
     },
-    orderBy: {
-      order_state: 'asc',
-    },
+    orderBy: [
+      {
+        order_state: 'asc',
+      },
+      { created_at: 'desc' },
+    ],
   });
 
   return orderList;
@@ -104,9 +107,12 @@ const todayOrderInfo = async () => {
         lte: todayEnd,
       },
     },
-    orderBy: {
-      order_state: 'asc',
-    },
+    orderBy: [
+      {
+        order_state: 'asc',
+      },
+      { created_at: 'desc' },
+    ],
   });
 
   return orderList;
