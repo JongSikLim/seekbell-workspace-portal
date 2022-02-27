@@ -1,5 +1,6 @@
 import { HeadWrapper } from 'components/common';
-import React, { Component } from 'react';
+import { Profile as Component } from 'components/Pages';
+import React from 'react';
 
 const Profile = () => {
   return (
