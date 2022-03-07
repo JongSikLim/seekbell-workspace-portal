@@ -4,8 +4,7 @@ import React from 'react';
 
 const Profile = () => {
   return (
-    <>  
-      {/* 콘솔용 */}
+    <>
       <HeadWrapper />
       <Component />
     </>
