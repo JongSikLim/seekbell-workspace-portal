@@ -5,7 +5,14 @@ import { orderService } from 'backend/services';
 const TodayLunch = (props: any) => {
   return (
     <>
-      <HeadWrapper />
+      <HeadWrapper
+        metaTemplate={{
+          html: {
+            title: '오늘의 점심은',
+            description: '점심 메뉴 파티를 구하기 위한 간단 서비스',
+          },
+        }}
+      />
       <Component />
     </>
   );

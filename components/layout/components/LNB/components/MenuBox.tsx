@@ -9,27 +9,26 @@ const MenuBox = () => {
     <div className={Styles['lnb-content']}>
       <Menu mode="inline" theme="dark">
         <Menu.Item key="landing">
-          <Link href={'/profile'}>🙋‍♂️Profile</Link>
+          <Link href={'/intro'}>🙋‍♂️Intro</Link>
         </Menu.Item>
         <SubMenu key="service" title="🧰Service">
           <Menu.Item key="1">
             <Link href={'/todaylunch'}>오늘의 점심은?</Link>
           </Menu.Item>
-          <Menu.Item key="2">추가 예정</Menu.Item>
-          <Menu.Item key="3">추가 예정222</Menu.Item>
+          <Menu.ItemGroup key={'uicomponent'} title="UI">
+            <Menu.Item key={'Intersection Observer'}>
+              <Link href={'/component/IO'}>Intersection Observer</Link>
+            </Menu.Item>
+          </Menu.ItemGroup>
         </SubMenu>
 
         <SubMenu key="document" title="📘Document">
           <Menu.ItemGroup key={'group1'} title="React">
             <Menu.Item key="doc-g1-1">doc-g1-1</Menu.Item>
-            <Menu.Item key="doc-g1-2">doc-g1-2</Menu.Item>
-            <Menu.Item key="doc-g1-3">doc-g1-3</Menu.Item>
           </Menu.ItemGroup>
-          <Menu.ItemGroup key={'group2'} title="Javascript">
-            <Menu.Item key="doc-g2-1">doc-g2-1</Menu.Item>
-            <Menu.Item key="doc-g2-2">doc-g2-2</Menu.Item>
-            <Menu.Item key="doc-g2-3">doc-g2-3</Menu.Item>
-          </Menu.ItemGroup>
+          {/* <Menu.ItemGroup key={'group2'} title="Javascript">
+          
+          </Menu.ItemGroup> */}
         </SubMenu>
       </Menu>
       {/* <Collapse>

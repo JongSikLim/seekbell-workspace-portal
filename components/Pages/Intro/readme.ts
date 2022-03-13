@@ -1,4 +1,5 @@
-# SEEKBELL PLAYGROUND PORTAL
+export default `
+## 프로젝트 소개
 
 
 ### Description
@@ -32,3 +33,4 @@ Next 프로젝트를 Fullstack 서비스 형태로 사용 (react + api + db)
 ---
 - Lazy Loading
 - Infinite Scroll
+`;

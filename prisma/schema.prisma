@@ -75,6 +75,16 @@ model Order_detail {
   user            User           @relation(fields: [user_id], references: [user_id])
 }
 
+model Document {
+  id             String   @id @default(uuid())
+  subject        String
+  contents       String
+  keywords       String[]
+  specific_index String? // 특정 파일을 지칭하기위한 것
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+}
+
 enum Role {
   USER
   ADMIN

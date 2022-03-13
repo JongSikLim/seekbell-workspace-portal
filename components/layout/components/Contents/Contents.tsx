@@ -1,25 +1,18 @@
-import React, { useMemo } from 'react';
-import { LayoutComponent } from '../../types';
-import Styles from 'styles/common/layout.module.scss';
 import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
+import Styles from 'styles/common/layout.module.scss';
+import { LayoutComponent } from '../../types';
 
 const Contents: LayoutComponent = ({ children }) => {
   const router = useRouter();
   const { pathname } = router;
+  const [title, setTitle] = useState('타이틀');
 
-  const title = useMemo(() => {
-    let _title;
-
-    switch (pathname) {
-      case '/todaylunch':
-        _title = '오늘의 점심은';
-        break;
-      default:
-        _title = '헤더 기본값';
-        break;
-    }
-
-    return _title;
+  useEffect(() => {
+    setTimeout(() => {
+      const _title = document.title;
+      setTitle(_title);
+    }, 1);
   }, [pathname]);
 
   return (
