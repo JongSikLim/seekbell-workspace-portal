@@ -31,13 +31,14 @@ const SignIn: SignInType = ({ setPage }) => {
         password,
       })
       .then((res) => {
+        setStep(TodayLunchPage.DASHBOARD)
         setUserInfo((prev) => {
           router.back();
-          setStep(TodayLunchPage.DASHBOARD)
           return res;
         });
       })
       .catch((err) => {
+        console.log('err: ', err);
         message.error('계정정보가 틀렸습니다.');
       });
   };
