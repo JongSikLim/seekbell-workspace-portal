@@ -7,8 +7,8 @@ import { paramSerialize as paramsSerializer } from './utils';
 
 const devBaseUrl = 'http://localhost:3000/api';
 const prodBaseUrl = 'http://playground.jsim.kr/api'
-// const baseURL = process.env.NODE_ENV === 'production' ? prodBaseUrl : devBaseUrl;
-const baseURL = devBaseUrl;
+const baseURL = process.env.NODE_ENV === 'production' ? prodBaseUrl : devBaseUrl;
+// const baseURL = devBaseUrl;
 
 const commonAxiosInstance = axios.create({
   baseURL,

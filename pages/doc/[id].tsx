@@ -25,31 +25,31 @@ const Doc = (props: any) => {
   );
 };
 
-export const getStaticProps = async (context: any) => {
-  const { id } = context.params;
-  const document = await commonAxios.get('document', { id });
+// export const getStaticProps = async (context: any) => {
+//   const { id } = context.params;
+//   const document = await commonAxios.get('document', { id });
 
-  return {
-    props: {
-      document,
-    },
-  };
-};
+//   return {
+//     props: {
+//       document,
+//     },
+//   };
+// };
 
-export const getStaticPaths = async () => {
-  const documentList = await commonAxios.get('document/list');
-  const idList = documentList.map((doc: any) => doc.id);
+// export const getStaticPaths = async () => {
+//   const documentList = await commonAxios.get('document/list');
+//   const idList = documentList.map((doc: any) => doc.id);
 
-  const paths = idList.map((id: string) => {
-    return {
-      params: { id },
-    };
-  });
+//   const paths = idList.map((id: string) => {
+//     return {
+//       params: { id },
+//     };
+//   });
 
-  return {
-    paths,
-    fallback: true,
-  };
-};
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
 
 export default Doc;
