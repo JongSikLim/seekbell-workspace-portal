@@ -7,7 +7,8 @@ import { paramSerialize as paramsSerializer } from './utils';
 
 const devBaseUrl = 'http://localhost:3000/api';
 const prodBaseUrl = 'http://playground.jsim.kr/api'
-const baseURL = process.env.NODE_ENV === 'production' ? prodBaseUrl : devBaseUrl;
+// const baseURL = process.env.NODE_ENV === 'production' ? prodBaseUrl : devBaseUrl;
+const baseURL = devBaseUrl;
 
 const commonAxiosInstance = axios.create({
   baseURL,
@@ -49,6 +50,9 @@ commonAxiosInstance.interceptors.response.use((response) => {
  */
 const commonAxios: AxiosHelper = {
   get: (url, params = {}, option = {}) => {
+
+
+
     return commonAxiosInstance.get(url, {
       ...option,
       params,

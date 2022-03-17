@@ -1,5 +1,4 @@
 import HeadComponent from 'next/head';
-import { useRouter } from 'next/router';
 
 type MetaTemplate = {
   html: {
@@ -21,9 +20,7 @@ type MetaTemplate = {
 type HeadWrapperProps = { metaTemplate: MetaTemplate };
 
 const HeadWrapper: React.FC<HeadWrapperProps> = ({ metaTemplate }) => {
-  const router = useRouter();
-
-  const { html, og } = metaTemplate;
+  const { html, og = undefined } = metaTemplate;
   const {
     title,
     description,

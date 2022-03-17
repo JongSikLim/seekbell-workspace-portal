@@ -1,8 +1,8 @@
-import { TodayLunch as Component } from 'components/Pages';
+import Component from 'components/Pages/TodayLunch/TodayLunch';
 import { HeadWrapper } from 'components/common';
-import { orderService } from 'backend/services';
+// import { orderService } from 'backend/services';
 
-const TodayLunch = (props: any) => {
+const TodayLunch = () => {
   return (
     <>
       <HeadWrapper
@@ -18,11 +18,11 @@ const TodayLunch = (props: any) => {
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const orderInfoList = await orderService.getOrderInfo();
-  return {
-    props: { orderInfoList },
-  };
-}
+// export async function getServerSideProps(context: any) {
+//   const orderInfoList = await orderService.getOrderInfo();
+//   return {
+//     props: {orderInfoList},
+//   };
+// }
 
 export default TodayLunch;

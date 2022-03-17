@@ -1,5 +1,7 @@
+// import { useRouter } from 'next/router';
+// import React, { useLayoutEffect } from 'react';
 import { useRouter } from 'next/router';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Page, stepState } from 'recoils/atoms/todaylunch';
 import { userInfoState } from 'recoils/atoms/user';
@@ -12,7 +14,7 @@ import {
 } from './components';
 import OrderInfo from './components/OrderInfo';
 
-const TodayLunch = (props: any) => {
+const TodayLunch = () => {
   const router = useRouter();
   const step = useRecoilValue(stepState);
   const userInfo = useRecoilValue(userInfoState);
@@ -24,15 +26,24 @@ const TodayLunch = (props: any) => {
     }
   }, []);
 
+  const $page = useMemo(() => {
+    let _element = <></>;
+
+    if (step === Page.NULL) { _element = <>loading</> }
+    else if (step === Page.DASHBOARD) { _element = <Dashboard /> }
+    else if (step === Page.HISTORY) { _element = <History /> }
+    else if (step === Page.ORDER) { _element = <Order /> }
+    else if (step === Page.NEW_CAFETERIA) { _element = <NewCafeteria /> }
+    else if (step === Page.CHOICE_MENU) { _element = <ChoiceMenu /> }
+    else if (step === Page.ORDER_INFO) { _element = <OrderInfo /> }
+
+    return _element;
+  }, [step])
+
   return (
-    <>
-      {step === Page.DASHBOARD && <Dashboard />}
-      {step === Page.HISTORY && <History />}
-      {step === Page.ORDER && <Order />}
-      {step === Page.NEW_CAFETERIA && <NewCafeteria />}
-      {step === Page.CHOICE_MENU && <ChoiceMenu />}
-      {step === Page.ORDER_INFO && <OrderInfo />}
-    </>
+    <div>
+      {$page}
+    </div>
   );
 };
 

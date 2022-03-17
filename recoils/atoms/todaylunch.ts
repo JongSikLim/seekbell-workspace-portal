@@ -2,6 +2,7 @@ import { Cafeteria, Order } from '@prisma/client';
 import { atom } from 'recoil';
 
 export enum Page {
+  NULL,
   ORDER,
   HISTORY,
   DASHBOARD,
@@ -13,7 +14,7 @@ export enum Page {
 // 현재 페이지 스텝
 export const stepState = atom<Page>({
   key: 'stepState',
-  default: Page.DASHBOARD,
+  default: Page.NULL,
 });
 
 // 식당 리스트

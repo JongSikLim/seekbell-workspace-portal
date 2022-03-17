@@ -1,6 +1,5 @@
 import { HeadWrapper } from 'components/common';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import commonAxios from 'utils/apiHelper';
 
 const MdEditor = dynamic(() => import('components/Pages/MdEditor'), {
@@ -8,11 +7,6 @@ const MdEditor = dynamic(() => import('components/Pages/MdEditor'), {
 });
 
 const Doc = (props: any) => {
-  const router = useRouter();
-  const { docid } = router.query;
-  const {
-    document: { contents },
-  } = props;
 
   return (
     <>

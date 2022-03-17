@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import '@toast-ui/editor/dist/toastui-editor.css';
 
 /**
  * index.tsx 에서 서버관련된 커스텀 설정을 한다.

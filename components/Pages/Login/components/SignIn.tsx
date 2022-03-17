@@ -3,9 +3,10 @@ import { Form, Input, Button, Checkbox, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import commonAxios from 'utils/apiHelper';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfoState } from 'recoils/atoms/user';
-
+import { stepState } from 'recoils/atoms/todaylunch';
+import { Page as TodayLunchPage } from 'recoils/atoms/todaylunch'
 enum Page {
   SIGN_IN,
   SIGN_UP,
@@ -17,7 +18,9 @@ type SignInType = React.FC<{
 
 const SignIn: SignInType = ({ setPage }) => {
   const router = useRouter();
+  const setStep = useSetRecoilState(stepState);
   const setUserInfo = useSetRecoilState(userInfoState);
+
 
   const onFinish = (values: any) => {
     const { id, password } = values;
@@ -28,9 +31,9 @@ const SignIn: SignInType = ({ setPage }) => {
         password,
       })
       .then((res) => {
-        console.log('res: ', res);
         setUserInfo((prev) => {
           router.back();
+          setStep(TodayLunchPage.DASHBOARD)
           return res;
         });
       })
