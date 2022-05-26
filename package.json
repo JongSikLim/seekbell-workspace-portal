@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test" : "jest",
     "start:prod": "yarn && pm2 start npm --name 'next' -- start",
     "db:migrate": "npx prisma migrate dev --name "
   },
@@ -36,6 +37,7 @@
     "@types/uuid": "^8.3.4",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
+    "jest": "^28.1.0",
     "prisma": "^3.11.0",
     "typescript": "4.5.5"
   }
