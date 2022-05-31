@@ -18,6 +18,10 @@ const MenuBox = () => {
           <Menu.ItemGroup key={'uicomponent'} title="UI">
             <Menu.Item key={'Intersection Observer'}>
               <Link href={'/component/IO'}>Intersection Observer</Link>
+              
+            </Menu.Item>
+            <Menu.Item key={'React context'}>              
+              <Link href={'/component/Context'}>React Context</Link>              
             </Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>

@@ -24,7 +24,8 @@ const nextConfig = {
   },
 };
 
-setInterval(() => {
+/**
+ * setInterval(() => {
   fetch('http://localhost:3000/api/order/timeTrigger', {
     method: 'GET',
   })
@@ -40,5 +41,6 @@ setInterval(() => {
       console.log('[ERROR][주문만료처리] ', err);
     });
 }, 1000 * 60);
+ */
 
 module.exports = nextConfig;
