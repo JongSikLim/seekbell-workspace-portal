@@ -1,7 +1,7 @@
 {
   "name": "seekbell-workspace-portal",
   "private": true,
-  "version": "0.0.5-noah-test.0",
+  "version": "0.0.5",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
