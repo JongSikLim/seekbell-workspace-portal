@@ -1,7 +1,7 @@
 {
   "name": "seekbell-workspace-portal",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6-0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +11,7 @@
     "start:prod": "yarn && pm2 start npm --name 'next' -- start",
     "db:migrate": "npx prisma migrate dev --name ",
     "release": "yarn standard-version && git push --follow-tags",
-    "release-alpha": "yarn yarn standard-version --prerelease $1 && git push --follow-tags origin && yarn publish"
+    "release-alpha": "yarn standard-version --prerelease $1 && git push --follow-tags origin && yarn publish"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
