@@ -5,16 +5,17 @@ import axios from 'axios';
 import { AxiosHelper, APIRequestHeaderContentTypes } from './type';
 import { paramSerialize as paramsSerializer } from './utils';
 
-const devBaseUrl = 'http://localhost:3000/api';
-const prodBaseUrl = 'http://playground.jsim.kr/api'
+const devBaseUrl = '/api/';
+const prodBaseUrl = 'http://playground.jsim.kr'
 const baseURL = process.env.NODE_ENV === 'production' ? prodBaseUrl : devBaseUrl;
-// const baseURL = devBaseUrl;
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
+
 
 const commonAxiosInstance = axios.create({
   baseURL,
   withCredentials: true,
   headers: {
-    'Content-Type': APIRequestHeaderContentTypes.form,
+    'Content-Type': APIRequestHeaderContentTypes.json,
   },
 });
 
@@ -50,9 +51,6 @@ commonAxiosInstance.interceptors.response.use((response) => {
  */
 const commonAxios: AxiosHelper = {
   get: (url, params = {}, option = {}) => {
-
-
-
     return commonAxiosInstance.get(url, {
       ...option,
       params,

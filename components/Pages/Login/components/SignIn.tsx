@@ -27,7 +27,7 @@ const SignIn: SignInType = ({ setPage }) => {
 
     commonAxios
       .post(`user/login`, {
-        id,
+        email: id,
         password,
       })
       .then((res) => {
