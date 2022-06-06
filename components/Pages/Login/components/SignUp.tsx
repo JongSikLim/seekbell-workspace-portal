@@ -29,8 +29,7 @@ const Signup: SignUpType = ({ setPage }) => {
         .then(() => {
           setPage(Page.SIGN_IN);
         })
-        .catch((err) => {
-          console.log('err: ', err);
+        .catch((err) => {          
         });
     });
   };

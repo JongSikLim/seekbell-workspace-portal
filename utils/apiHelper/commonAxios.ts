@@ -1,6 +1,7 @@
 /**
  * API 모듈
  */
+import { message } from 'antd';
 import axios from 'axios';
 import { AxiosHelper, APIRequestHeaderContentTypes } from './type';
 import { paramSerialize as paramsSerializer } from './utils';
@@ -36,7 +37,8 @@ commonAxiosInstance.interceptors.response.use((response) => {
   return new Promise((resolve, reject) => {
     const { status, data } = response;
 
-    if (status === 200) {
+    if (status.toFixed().match(/20[01]/g)) {
+      message.success('회원가입 성공');
       resolve(data);
     } else {
       reject(data);

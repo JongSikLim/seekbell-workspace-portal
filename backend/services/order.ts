@@ -37,6 +37,7 @@ const selectOption = {
   },
 };
 
+// due date가 끝난 주문들 자동 완료처리
 const timeTrigger = async () => {
   const date = moment().toDate();
 
